@@ -1,12 +1,23 @@
 
 --Drops the employee-traker-db if it exists 
-DROP DATABASE IF EXISTS Employee-Traker-db;
+DROP DATABASE IF EXISTS Employee_Traker_db;;
 
 -- Created the DB " employee-traker-db"
-CREATE DATABASE Employee-Traker-db;
+CREATE DATABASE Employee_Traker_db;
 
 -- Use the DB  employee-traker-db for all the rest of the script
-USE Employee-Traker-db;
+USE Employee_Traker_db;
+
+
+-- Created the tables
+
+DROP DATABASE IF EXISTS Employee_Traker_db;
+
+-- Created the DB " employee-traker-db"
+CREATE DATABASE Employee_Traker_db;
+
+-- Use the DB  employee-traker-db for all the rest of the script
+USE Employee_Traker_db;
 
 -- Created the tables
 CREATE TABLE department (
@@ -17,9 +28,9 @@ CREATE TABLE department (
 
 CREATE TABLE role (
   id int AUTO_INCREMENT NOT NULL,
-  title VARCHAR(30)  NOT NULL,
-  salary  DECIMAL(10),
-  department_id INT
+  role_title VARCHAR(30)  NOT NULL,
+  role_salary  DECIMAL NOT NULL,
+  department_id INT,
   PRIMARY KEY(id)
 );
 
@@ -27,13 +38,11 @@ CREATE TABLE role (
 CREATE TABLE employee(
   id int AUTO_INCREMENT NOT NULL,
   first_name VARCHAR(30),
-  last_name - VARCHAR(30),
-  salary  DECIMAL(10),
-  role_id - INT,
-  manager_id - INT,
+  last_name  VARCHAR(30),
+  role_id  INT,
+  manager_id INT,
   PRIMARY KEY(id)
 );
-
 
 
 
