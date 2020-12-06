@@ -19,7 +19,7 @@ var connection = mysql.createConnection({
   
   connection.connect(function(err) {
     if (err) throw err;
-    
+   
     start();
   });
 
@@ -54,58 +54,72 @@ function start(){
         .then(function(data){
             switch(data.choice){
                 case"View All Employees":
+                console.log("");
                 viewAllEmployees();
                 break;
 
                 case"View All Employees By Department":
+                console.log("");
                 viewAllEmployeesD();
                 break;
 
                 case"View All Employees By Manager":
+                console.log("");
                 viewAllEmployeesM();
                 break;
 
                 case"Add Employee":
+                console.log("");
                 addEmployees();
                 break;
 
                 case"Remove Empolyee":
+                console.log("");
                 removeEmployees();
                 break;
 
                 case"Update Employee Role":
+                console.log("");
                 updateRole();
                 break;
 
                 case"Update Employee Manager":
+                console.log("");
                 updateManager();
                 break;
 
                 case"view All Roles":
+                console.log("");
                 viewRoles();
                 break;
 
                 case"Add Role":
+                console.log("");
                 addRole();
                 break;
 
                 case"Remove Role":
+                console.log("");
                 removeRole();
                 break;
 
                 case"View All Departments":
+                console.log("");
                 viewDepartments();
                 break;
 
                 case"Add Department":
+                console.log("");
                 addDepartment();
                 break;
 
                 case"Remove Department":
+                console.log("");
                 removeDepartment();
                 break;
 
                 case"Quit":
+                console.log("");
                 quit();
                 break;
 
@@ -122,10 +136,13 @@ function viewAllEmployees(){
         if (err) throw err;
         console.table(res);
         console.log("");
+        console.log("---------------------------------");
+
         start();
     })
 
 }
+
 // View All Employees By Department
 function viewAllEmployeesD(){
     const query ="SELECT employee.id,first_name, last_name, role_id, manager_id FROM employee RIGHT OUTER JOIN role ON role_id = role.id"
@@ -133,6 +150,8 @@ function viewAllEmployeesD(){
         if (err) throw err;
         console.table(res);
         console.log("");
+        console.log("---------------------------------");
+
         start();
     })
 
@@ -146,6 +165,7 @@ function viewAllEmployeesM(){
         if (err) throw err;
         console.table(res);
         console.log("");
+        console.log("---------------------------------");
         start();
     })
 
@@ -159,9 +179,58 @@ function viewRoles(){
         if (err) throw err;
         console.table(res);
         console.log("");
+        console.log("---------------------------------");
         start();
     })
 
+}
+
+// Add Roles
+
+function addRole(){
+    inquirer
+    .prompt
+    ( [
+        {
+            name:"role_title",
+            type:"input",
+            message:"Enter Role Title",
+        },
+        {
+            name:"role_salary",
+            type:"number",
+            message:"Enter Role Salary",
+        },
+        {
+            name:"department_id",
+            type:"number",
+            message:"Enter Department ID",
+        }
+       
+
+    
+    ])
+    .then(function(data){
+        connection.query("INSERT INTO role SET ?",
+       [  
+           {
+            
+            role_title: data.role_title,
+            role_salary: data.role_salary,
+            department_id:data.department_id
+          
+           }
+       ],
+        
+        function(err, res){
+            if(err)throw err;
+            console.log(`Roles title ${data.role_title} Salary ${data.role_salary} and department ID ${data.department_id} Sussessfuly added.`)
+            console.log("");
+            console.log("---------------------------------");
+            start();
+        }
+        )
+    })
 }
 
 //View All Departments
@@ -171,6 +240,7 @@ function viewDepartments(){
         if (err) throw err;
         console.table(res);
         console.log("");
+        console.log("---------------------------------");
         start();
     })
 
@@ -201,11 +271,14 @@ function  updateRole(){
         .then(function(data){
             connection.query("UPDATE employee SET ? WHERE ?",
             [
-                {role_id:data.roleID}, {id:data.id}
+                {role_id:data.roleID},
+                 {id:data.id},
             ],
             function(err,res){
                 if(err)throw err;
                 console.log(`Employee ID ${data.id} updated with role ID ${data.roleID}`)
+                console.log("");
+                console.log("---------------------------------");
                 start();
             }
             )
@@ -237,11 +310,14 @@ function updateManager(){
         .then(function(data){
             connection.query("UPDATE employee SET ? WHERE ?",
             [
-                {manager_id:data.managerID}, {id:data.id}
+                {manager_id:data.managerID},
+                 {id:data.id}
             ],
             function(err,res){
                 if(err)throw err;
                 console.log(`Employee ID ${data.id} updated with manager ID ${data.managerID}`)
+                console.log("");
+                console.log("---------------------------------");
                 start();
             }
             )
@@ -289,6 +365,8 @@ function  addEmployees(){
         function(err, res){
             if(err)throw err;
             console.log(`Employee First Name ${data.first_name} Last Name ${data.last_name} with role ID ${data.role_id} and manager ID${data.manager_id} is Sussessfuly added.`)
+            console.log("");
+            console.log("---------------------------------");
             start();
         }
         )
@@ -319,6 +397,8 @@ function removeEmployees(){
         function(err, res){
             if(err)throw err;
             console.log(`Employee ${data.id} is Sussessfuly Removed` )
+            console.log("");
+            console.log("---------------------------------");
             start();
         }
         )
