@@ -171,3 +171,39 @@ function viewDepartments(){
     })
 
 }
+
+//Update Employee Role
+
+function  updateRole(){
+    
+    inquirer
+
+    .prompt(
+        [
+            {
+                name:"id",
+                type:"numbe",
+                message:"Enter employee ID",
+            },
+
+            {
+                name:"roleID",
+                type:"number",
+                message:"Enter the updated role ID",
+            }
+
+           
+        ])
+        .then(function(data){
+            connection.query("UPDATE employee SET ? WHERE ?",
+            [
+                {role_id:data.roleID}, {id:data.id}
+            ],
+            function(err,res){
+                if(err)throw err;
+                console.log(`Employee ID ${data.id} updated with role ID ${data.roleID}`)
+                start();
+            }
+            )
+        })
+}
