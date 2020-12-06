@@ -206,4 +206,36 @@ function  updateRole(){
             }
             )
         })
+
+
+}
+
+//Add Employee
+function  addEmployees(){
+    inquirer
+    .prompt
+    ( [
+        {
+            name:"first_name",
+            type:"input",
+            message:"Enter Employee First Name",
+        },
+        {
+            name:" last_name",
+            type:"Input",
+            message:"Enter Employee Last Name",
+        },
+        {
+            name:"role_id",
+            type:"input",
+            message:"Enter role ID",
+        },
+        {
+            name:"manager_id",
+            type:"input",
+            message:"Enter manager ID",
+        }
+
+    
+    ])
 }
