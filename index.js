@@ -294,3 +294,33 @@ function  addEmployees(){
         )
     })
 }
+
+// Remove Employee
+//DELETE FROM table_name WHERE condition;
+
+function removeEmployees(){
+    inquirer
+    .prompt
+    ( [
+        {
+            name:"id",
+            type:"number",
+            message:"Enter Employee ID",
+        },
+    
+    ])
+    .then(function(data){
+        connection.query("DELETE FROM employee WHERE ?",
+        {
+            id: data.id,
+           
+        },
+        
+        function(err, res){
+            if(err)throw err;
+            console.log(`Employee ${data.id} is Sussessfuly Removed` )
+            start();
+        }
+        )
+    })
+}
