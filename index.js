@@ -77,6 +77,10 @@ function start(){
                 updateRole();
                 break;
 
+                case"Update Employee Manager":
+                updateManager();
+                break;
+
                 case"view All Roles":
                 viewRoles();
                 break;
@@ -210,6 +214,41 @@ function  updateRole(){
 
 }
 
+//Update Employee Manager
+function updateManager(){
+    inquirer
+
+    .prompt(
+        [
+            {
+                name:"id",
+                type:"numbe",
+                message:"Enter employee ID",
+            },
+
+            {
+                name:"managerID",
+                type:"number",
+                message:"Enter the updated Manager ID",
+            }
+
+           
+        ])
+        .then(function(data){
+            connection.query("UPDATE employee SET ? WHERE ?",
+            [
+                {manager_id:data.managerID}, {id:data.id}
+            ],
+            function(err,res){
+                if(err)throw err;
+                console.log(`Employee ID ${data.id} updated with manager ID ${data.managerID}`)
+                start();
+            }
+            )
+        })
+
+}
+
 //Add Employee
 function  addEmployees(){
     inquirer
@@ -221,21 +260,37 @@ function  addEmployees(){
             message:"Enter Employee First Name",
         },
         {
-            name:" last_name",
+            name:"last_name",
             type:"Input",
             message:"Enter Employee Last Name",
         },
         {
             name:"role_id",
-            type:"input",
+            type:"number",
             message:"Enter role ID",
         },
         {
             name:"manager_id",
-            type:"input",
+            type:"number",
             message:"Enter manager ID",
         }
 
     
     ])
+    .then(function(data){
+        connection.query("INSERT INTO employee SET ?",
+        {
+            first_name: data.first_name,
+            last_name: data.last_name,
+            role_id:data.role_id,
+            manager_id: data.manager_id
+        },
+        
+        function(err, res){
+            if(err)throw err;
+            console.log(`Employee First Name ${data.first_name} Last Name ${data.last_name} with role ID ${data.role_id} and manager ID${data.manager_id} is Sussessfuly added.`)
+            start();
+        }
+        )
+    })
 }
