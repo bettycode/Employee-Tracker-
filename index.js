@@ -31,7 +31,7 @@ function start(){
                 name:"choice",
                 message:"What would you like to do?",
                 choices:[
-                    
+
                     "View All Employees",
                     "View All Employees By Department",
                     "View All Employees By Manager",
@@ -255,6 +255,37 @@ function addRole(){
     })
 }
 
+// Remove Role
+
+function  removeRole(){
+    inquirer
+    .prompt
+    ( [
+        {
+            name:"id",
+            type:"number",
+            message:"Enter Role ID",
+        },
+    
+    ])
+    .then(function(data){
+        connection.query("DELETE FROM role WHERE ?",
+        {
+            id: data.id,
+           
+        },
+        
+        function(err, res){
+            if(err)throw err;
+            console.log(`Role ${data.id} is Sussessfuly Removed` )
+            console.log("");
+            console.log("---------------------------------");
+            start();
+        }
+        )
+    })
+}
+
 //View All Departments
 function viewDepartments(){
     const query ="SELECT * FROM department" ;
@@ -440,8 +471,8 @@ function  addEmployees(){
             name:"manager_id",
             type:"number",
             message:"Enter manager ID",
-        }
-
+        },
+        
     
     ])
     .then(function(data){
@@ -450,17 +481,21 @@ function  addEmployees(){
             first_name: data.first_name,
             last_name: data.last_name,
             role_id:data.role_id,
-            manager_id: data.manager_id
+            manager_id: data.manager_id,
         },
+       
+        
         
         function(err, res){
             if(err)throw err;
             console.log(`Employee First Name ${data.first_name} Last Name ${data.last_name} with role ID ${data.role_id} and manager ID${data.manager_id} is Sussessfuly added.`)
+            
             console.log("");
             console.log("---------------------------------");
             start();
         }
         )
+    
     })
 }
 
