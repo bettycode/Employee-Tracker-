@@ -31,6 +31,7 @@ function start(){
                 name:"choice",
                 message:"What would you like to do?",
                 choices:[
+                    
                     "View All Employees",
                     "View All Employees By Department",
                     "View All Employees By Manager",
