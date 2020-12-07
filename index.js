@@ -131,15 +131,36 @@ function start(){
 
 // View All Employees
 function viewAllEmployees(){
-    const query ="SELECT * FROM employee" ;
-    connection.query(query,function(err, res){
+    var query =
+    `SELECT e.id, e.first_name, e.last_name, role_title, d.name AS department,role_salary, CONCAT(m.first_name, ' ', m.last_name) AS manager 
+    FROM employee e
+    LEFT JOIN role r
+    ON e.role_id = r.id
+    LEFT JOIN department d
+    ON d.id = r.department_id
+    LEFT JOIN employee m
+    ON m.id = e.manager_id`
+    
+    connection.query(query, function (err, res) {
         if (err) throw err;
+    
         console.table(res);
-        console.log("");
-        console.log("---------------------------------");
+        console.log("All Employees!\n");
 
         start();
-    })
+    
+    }  ) 
+    // const query ="SELECT * FROM employee" ;
+    // connection.query(query,function(err, res){
+    //     if (err) throw err;
+    //     console.table(res);
+    //     console.log("");
+    //     console.log("---------------------------------");
+
+    //     start();
+    // })
+
+    
 
 }
 
@@ -244,6 +265,75 @@ function viewDepartments(){
         start();
     })
 
+}
+
+//Add Departments
+
+
+function  addDepartment(){
+    inquirer
+    .prompt
+    ( [
+        {
+            name:"name",
+            type:"input",
+            message:"Enter Department Title",
+        },
+        
+       
+
+    
+    ])
+    .then(function(data){
+        connection.query("INSERT INTO department SET ?",
+       [  
+           {
+            
+            name: data.name,
+           
+          
+           }
+       ],
+        
+        function(err, res){
+            if(err)throw err;
+            console.log(`Department ${data.name}  Sussessfuly added.`)
+            console.log("");
+            console.log("---------------------------------");
+            start();
+        }
+        )
+    })
+}
+// Remove Department
+
+function removeDepartment(){
+    inquirer
+    .prompt
+    ( [
+        {
+            name:"id",
+            type:"number",
+            message:"Enter Department ID",
+        },
+    
+    ])
+    .then(function(data){
+        connection.query("DELETE FROM department WHERE ?",
+        {
+            id: data.id,
+           
+        },
+        
+        function(err, res){
+            if(err)throw err;
+            console.log(`Department ${data.id} is Sussessfuly Removed` )
+            console.log("");
+            console.log("---------------------------------");
+            start();
+        }
+        )
+    })
 }
 
 //Update Employee Role
