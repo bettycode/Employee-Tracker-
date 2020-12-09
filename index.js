@@ -1,8 +1,10 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const consoleTable = require("console.table");
+const figlet = require("figlet");
+var clear = require('clear');
 
-
+// ---------connection--------
 var connection = mysql.createConnection({
     host: "localhost",
   
@@ -22,6 +24,18 @@ var connection = mysql.createConnection({
    
     start();
   });
+
+  
+ 
+figlet('EMPLOYEE-TRAKER!!', function(err, data) {
+    if (err) {
+        console.log('Something went wrong...');
+        console.dir(err);
+        return;
+    }
+    console.log(data)
+   
+});
 
 function start(){ 
     inquirer
@@ -529,4 +543,10 @@ function removeEmployees(){
         }
         )
     })
+}
+
+function quit(){
+    clear();
+    connection.end();
+   
 }
