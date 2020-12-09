@@ -32,7 +32,12 @@ Companies are able to view and manage the departments, roles, and employees, So 
 Dependencies must be installed to run the application properly: 
 
 * inquirer
+
 * mysql
+
+* figlet
+
+* clear
 
 # Usage
 

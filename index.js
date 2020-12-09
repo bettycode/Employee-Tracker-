@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const mysql = require("mysql");
 const consoleTable = require("console.table");
 const figlet = require("figlet");
-var clear = require('clear');
+const clear = require('clear');
 
 // ---------connection--------
 var connection = mysql.createConnection({
