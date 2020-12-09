@@ -6,6 +6,7 @@
 
 # Description
 
+Companies are able to view and manage the departments, roles, and employees, So that they can organize and plan their business.
 
 
 # Table of Contents
@@ -24,10 +25,32 @@
 
 # Installation
 
-Dependencies must be installed to run the application properly: inquirer
+Dependencies must be installed to run the application properly: 
+
+* inquirer
+* mysql
 
 # Usage
 
+Command-line application that allows the user to:
+
+
+* Add departments, roles, employees
+
+
+* View departments, roles, employees
+
+
+* Update employee roles
+
+
+* Update employee managers
+
+
+* View employees by manager
+
+
+* Delete departments, roles, and employees
 
 # License
 
