@@ -11,7 +11,7 @@ VALUES
 ('Developer', 130000, 1), --1
 ('Marketing Specialist', 70000, 2),--2
 ('Accountant',50000,3),--3
-('Billing', 30000, 3);--3
+('Billing', 30000, 3);--4
 
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
