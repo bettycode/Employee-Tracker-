@@ -9,6 +9,10 @@
 Companies are able to view and manage the departments, roles, and employees, So that they can organize and plan their business.
 
 
+
+![Demo](employeeT.gif)
+
+
 # Table of Contents
 
 * [Installation](#installation)
