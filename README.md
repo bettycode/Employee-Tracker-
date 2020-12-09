@@ -12,6 +12,10 @@ Companies are able to view and manage the departments, roles, and employees, So 
 
 ![Demo](employeeT.gif)
 
+#
+
+![Pic](pic.png)
+
 
 # Table of Contents
 
